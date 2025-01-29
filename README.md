@@ -35,14 +35,13 @@
 To get started with the **ProcureTrack** app, follow these steps:
 
 ### Prerequisites
-1. Ensure you have **Node.js** and **npm** installed for frontend dependencies.
-2. Ensure you have **PHP** and **Composer** installed for backend setup.
-3. Set up a **MySQL** database or any preferred database.
+1. Ensure you have **PHP** and **Composer** installed for backend setup.
+2. Set up a **MySQL** database or any preferred database.
 
 ### Backend Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/procuretrack.git
+   git clone https://github.com/MCBANKSKE/procuretrack.git
    cd procuretrack
    ```
 2. Install PHP dependencies:
@@ -63,60 +62,12 @@ To get started with the **ProcureTrack** app, follow these steps:
    php artisan db:seed
    ```
 
-### Frontend Setup
-1. Navigate to the frontend directory:
-   ```bash
-   cd frontend
-   ```
-2. Install frontend dependencies:
-   ```bash
-   npm install
-   ```
-3. Build the frontend assets:
-   ```bash
-   npm run build
-   ```
-
 ### Running the Application
 1. Start the Laravel development server:
    ```bash
    php artisan serve
    ```
 2. Open your browser and visit `http://localhost:8000` to view the application.
-
-## Pricing Plans
-
-1. **Basic** – $10/month
-   - Procurement Tracking
-   - Sales Management
-   - Stock Control
-2. **Pro** – $25/month
-   - All Basic Features
-   - Automated Purchase Orders
-   - Role-Based Access
-   - Advanced Reporting
-3. **Enterprise** – $50/month
-   - All Pro Features
-   - Custom Integrations
-   - Dedicated Support
-   - API Access
-
-## FAQ
-
-1. **How does the stock update work?**
-   - Stock levels are automatically updated after a sale.
-
-2. **Can I generate financial reports?**
-   - Yes! You can export reports in Excel & PDF for sales, purchases, and products.
-
-3. **Can I manage supplier payments?**
-   - Yes, the app includes accounting & ledger tracking for payments and expenses.
-
-4. **Will there be role-based access?**
-   - Yes! Future updates will introduce Admin, Procurement, and Sales roles.
-
-5. **Can I receive alerts for low stock?**
-   - Yes! The system sends email notifications when stock is low.
 
 ## Contact
 
