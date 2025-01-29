@@ -1,7 +1,3 @@
-Here’s a README file for your web project:
-
----
-
 # ProcureTrack - Procurement & Sales Management
 
 **ProcureTrack** is a comprehensive tool designed to streamline procurement, sales, inventory, and accounting management for small to large businesses. With features like purchase requests, sales order management, reporting, and expense tracking, ProcureTrack offers an intuitive solution to manage your procurement and sales processes in one place.
@@ -125,8 +121,4 @@ To get started with the **ProcureTrack** app, follow these steps:
 ## Contact
 
 For feature requests or support, feel free to contact us at:  
-[Email: info@rmsystems.site](mailto:info@rmsystems.site)
-
----
-
-Let me know if you'd like to adjust anything or add more details!
+[Email: info@rmsystems.site](mailto:info@rmsystems.site) or WhatsApp +254798808796
