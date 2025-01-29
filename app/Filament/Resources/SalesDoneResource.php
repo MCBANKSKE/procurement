@@ -11,6 +11,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Exports\SalesExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -82,6 +84,19 @@ class SalesDoneResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ])
+            ->headerActions([
+                Tables\Actions\Action::make('Export Sales Excel')
+                    ->url(route('export.sales', ['format' => 'excel']))
+                    //->icon('heroicon-o-download')
+                    ->color('success')
+                    ->label('Export Sales Excel'),
+
+                Tables\Actions\Action::make('Export Sales PDF')
+                    ->url(route('export.sales', ['format' => 'pdf']))
+                    //->icon('heroicon-o-download')
+                    ->color('primary')
+                    ->label('Export Sales PDF'),
             ]);
     }
 
@@ -96,7 +111,7 @@ class SalesDoneResource extends Resource
     {
         return [
             'index' => Pages\ListSalesDones::route('/'),
-            'create' => Pages\CreateSalesDone::route('/create'),
+            //'create' => Pages\CreateSalesDone::route('/create'),
             'edit' => Pages\EditSalesDone::route('/{record}/edit'),
         ];
     }

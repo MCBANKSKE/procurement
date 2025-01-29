@@ -12,6 +12,9 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Exports\ProductsExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -84,6 +87,14 @@ class ProductResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ])
+            ->headerActions([
+                Tables\Actions\Action::make('Export Excel')
+                    ->action(fn () => Excel::download(new ProductsExport, 'products.xlsx'))
+                    ->color('success'),
+                Tables\Actions\Action::make('Export PDF')
+                    ->action(fn () => redirect()->route('export.products', 'pdf'))
+                    ->color('danger'),
             ]);
     }
 

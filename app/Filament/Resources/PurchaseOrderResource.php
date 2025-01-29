@@ -115,7 +115,20 @@ class PurchaseOrderResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+             ->headerActions([
+                    Tables\Actions\Action::make('Export Purchases Excel')
+                        ->url(route('export.purchases', ['format' => 'excel']))
+                        //->icon('heroicon-o-download')
+                        ->color('success')
+                        ->label('Export Purchases Excel'),
+
+                    Tables\Actions\Action::make('Export Purchases PDF')
+                        ->url(route('export.purchases', ['format' => 'pdf']))
+                       // ->icon('heroicon-o-download')
+                        ->color('primary')
+                        ->label('Export Purchases PDF'),
+                ]);
     }
 
 
@@ -130,7 +143,7 @@ class PurchaseOrderResource extends Resource
     {
         return [
             'index' => Pages\ListPurchaseOrders::route('/'),
-            'create' => Pages\CreatePurchaseOrder::route('/create'),
+            //'create' => Pages\CreatePurchaseOrder::route('/create'),
             'edit' => Pages\EditPurchaseOrder::route('/{record}/edit'),
         ];
     }

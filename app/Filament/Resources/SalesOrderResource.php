@@ -137,7 +137,7 @@ class SalesOrderResource extends Resource
     {
         return [
             'index' => Pages\ListSalesOrders::route('/'),
-            'create' => Pages\CreateSalesOrder::route('/create'),
+            //'create' => Pages\CreateSalesOrder::route('/create'),
             'edit' => Pages\EditSalesOrder::route('/{record}/edit'),
         ];
     }
