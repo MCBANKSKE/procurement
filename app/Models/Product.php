@@ -25,41 +25,42 @@ class Product extends Model
         return $this->belongsTo(Supplier::class);
     }
 
-    public function stocks()
+    public function stock()
     {
         return $this->hasMany(Stock::class);
     }
 
-     // Automatically update stock when quantity is updated
+    // Accessor to get the latest stock balance
+    public function getStockBalanceAttribute()
+    {
+        return $this->stock()->latest()->value('stock_balance') ?? 0; // Default to 0 if no stock exists
+    }
+
+    
+    // Automatically log stock movement when quantity is updated
     public static function boot()
     {
         parent::boot();
 
         static::saved(function ($product) {
-            // Check if the quantity has changed and update stock accordingly
-            // Here you can adjust stock movements, e.g., adding or removing stock
-            // Example: If quantity is updated, we could log it into the Stock table
+            // If quantity changes, log the stock movement
             if ($product->isDirty('quantity')) {
                 $difference = $product->quantity - $product->getOriginal('quantity');
 
-                // Add or remove stock based on the difference
-                if ($difference > 0) {
-                    // Stock was added
-                    Stock::create([
-                        'product_id' => $product->id,
-                        'quantity' => $difference,
-                        'type' => 'in',  // Stock added
-                        'price' => $product->purchase_price,
-                    ]);
-                } elseif ($difference < 0) {
-                    // Stock was removed
-                    Stock::create([
-                        'product_id' => $product->id,
-                        'quantity' => abs($difference),
-                        'type' => 'out', // Stock removed
-                        'price' => $product->selling_price,
-                    ]);
-                }
+                // Determine if the movement is "in" (added) or "out" (removed)
+                $type = $difference > 0 ? 'in' : 'out';
+
+                // Calculate stock balance after this change
+                $newBalance = $product->quantity;
+
+                // Create a stock movement record
+                Stock::create([
+                    'product_id' => $product->id,
+                    'quantity' => abs($difference),
+                    'type' => $type,
+                    'price' => $product->purchase_price, // You could choose selling_price if desired
+                    'stock_balance' => $newBalance,
+                ]);
             }
         });
     }

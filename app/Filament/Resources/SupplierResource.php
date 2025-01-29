@@ -80,7 +80,7 @@ class SupplierResource extends Resource
     {
         return [
             'index' => Pages\ListSuppliers::route('/'),
-            'create' => Pages\CreateSupplier::route('/create'),
+            //'create' => Pages\CreateSupplier::route('/create'),
             'edit' => Pages\EditSupplier::route('/{record}/edit'),
         ];
     }

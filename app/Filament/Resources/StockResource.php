@@ -19,7 +19,7 @@ class StockResource extends Resource
     protected static ?string $model = Stock::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-cube-transparent';
-    protected static ?string $navigationLabel = 'Stock';
+    protected static ?string $navigationLabel = 'Stock Movement';
     protected static ?string $navigationGroup = 'Procurement';
 
 
@@ -45,6 +45,16 @@ class StockResource extends Resource
                     ])
                     ->required(),
 
+                // Read-only field to display stock balance, automatically updated
+                Forms\Components\TextInput::make('stock_balance')
+                    ->label('Stock Balance')
+                    ->default(function ($state, $get) {
+                        $product = Product::find($get('product_id')); // Get the product based on product_id
+                        return $product ? $product->quantity : 0; // Return current stock balance
+                    })
+                    ->disabled() // Make it readonly, so it cannot be edited manually
+                    ->numeric(),
+
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->numeric()
@@ -59,6 +69,7 @@ class StockResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('product.name')->label('Product'),
                 Tables\Columns\TextColumn::make('quantity'),
+                Tables\Columns\TextColumn::make('stock_balance')->label('Stock Balance'),
                 Tables\Columns\TextColumn::make('type')->label('Movement Type'),
                 Tables\Columns\TextColumn::make('price')->money('KES'),
                 Tables\Columns\TextColumn::make('created_at')->dateTime(),
@@ -67,7 +78,7 @@ class StockResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                //Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -87,8 +98,8 @@ class StockResource extends Resource
     {
         return [
             'index' => Pages\ListStocks::route('/'),
-            'create' => Pages\CreateStock::route('/create'),
-            'edit' => Pages\EditStock::route('/{record}/edit'),
+            //'create' => Pages\CreateStock::route('/create'),
+           // 'edit' => Pages\EditStock::route('/{record}/edit'),
         ];
     }
 }

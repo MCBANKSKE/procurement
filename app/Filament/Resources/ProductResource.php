@@ -6,6 +6,7 @@ use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use App\Models\Supplier;
+use App\Models\Stock;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -20,7 +21,7 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cube';
     protected static ?string $navigationLabel = 'Products';
-    protected static ?string $navigationGroup = 'Procurement';
+    protected static ?string $navigationGroup = 'Product Management';
 
     public static function form(Form $form): Form
     {
@@ -66,7 +67,9 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('selling_price')
                     ->money('KES')
                     ->label('Selling Price'),
-                Tables\Columns\TextColumn::make('quantity'),
+                Tables\Columns\TextColumn::make('stock_balance') // Use the accessor
+                ->label('Stock Balance')
+                ->sortable(),
                 Tables\Columns\TextColumn::make('supplier.name')->label('Supplier'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
@@ -95,7 +98,7 @@ class ProductResource extends Resource
     {
         return [
             'index' => Pages\ListProducts::route('/'),
-            'create' => Pages\CreateProduct::route('/create'),
+            //'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }
